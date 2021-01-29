@@ -1,0 +1,29 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  push:
+  pull_request:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run a one-line script
+        run: |
+          set -e
+
+          echo
+          echo "-- Environment variables ----------------------------------------------"
+          env
+          echo "-----------------------------------------------------------------------"
+
+          echo
+          echo "-- Event JSON ---------------------------------------------------------"
+          cat "$GITHUB_EVENT_PATH" | jq -M .
+          echo "-----------------------------------------------------------------------"
+          echo
